@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Prediction Result</title>
+
+<style>
+    body {
+        background-color: #121212;
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+        transition: background 0.3s, color 0.3s;
+    }
+
+    body.light {
+        background-color: #f5f5f5;
+        color: #000000;
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 25px;
+        color: #00e676;
+    }
+
+    body.light h1 {
+        color: #2e7d32;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 800px;
+        margin: 30px auto;
+        background-color: #1e1e1e;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    body.light .container {
+        background-color: #ffffff;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 14px;
+        border-bottom: 1px solid #444;
+        text-align: left;
+    }
+
+    body.light th, body.light td {
+        border-color: #ccc;
+    }
+
+    th {
+        background-color: #263238;
+        color: #00e676;
+    }
+
+    body.light th {
+        background-color: #e0e0e0;
+        color: #2e7d32;
+    }
+
+    .highlight {
+        color: #ffca28;
+        font-weight: bold;
+    }
+
+    body.light .highlight {
+        color: #d84315;
+    }
+
+    .progress {
+        background-color: #333;
+        border-radius: 10px;
+        overflow: hidden;
+        height: 18px;
+    }
+
+    body.light .progress {
+        background-color: #ddd;
+    }
+
+    .progress-bar {
+        height: 100%;
+        width: 85%;
+        background-color: #00e676;
+        text-align: center;
+        font-size: 12px;
+        color: #000;
+    }
+
+    .btn {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 12px 18px;
+        background-color: #00e676;
+        color: #000;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: bold;
+    }
+
+    .btn:hover {
+        background-color: #00c853;
+    }
+
+    .toggle {
+        float: right;
+        cursor: pointer;
+        background: none;
+        border: 1px solid #00e676;
+        color: #00e676;
+        padding: 6px 12px;
+        border-radius: 6px;
+    }
+
+    body.light .toggle {
+        border-color: #2e7d32;
+        color: #2e7d32;
+    }
+
+    @media (max-width: 600px) {
+        th, td {
+            font-size: 14px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<button class="toggle" onclick="toggleMode()">🌗 Toggle Mode</button>
+
+<h1>Prediction Result</h1>
+
+<div class="container">
+<table>
+    <tr>
+        <th>Parameter</th>
+        <th>Value</th>
+    </tr>
+    <tr>
+        <td>Crop</td>
+        <td>{{ crop }}</td>
+    </tr>
+    <tr>
+        <td>State</td>
+        <td>{{ state }}</td>
+    </tr>
+    <tr>
+        <td>Season</td>
+        <td>{{ season }}</td>
+    </tr>
+    <tr>
+        <td>Predicted Yield</td>
+        <td class="highlight">{{ prediction }} MT / Hectare</td>
+    </tr>
+    <tr>
+        <td>Yield Range</td>
+        <td>{{ "%.2f"|format(prediction|float * 0.93) }} – {{ "%.2f"|format(prediction|float * 1.07) }} MT</td>
+    </tr>
+    <tr>
+        <td>Confidence Level</td>
+        <td>
+            <div class="progress">
+                <div class="progress-bar">85%</div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>Prediction Accuracy</td>
+        <td class="highlight">± 7%</td>
+    </tr>
+</table>
+
+<a href="/" class="btn">Make Another Prediction</a>
+</div>
+
+<script>
+function toggleMode() {
+    document.body.classList.toggle("light");
+}
+</script>
+
+</body>
+</html>

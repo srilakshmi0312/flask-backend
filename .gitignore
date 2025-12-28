@@ -1,0 +1,13 @@
+# Virtual environments
+venv/
+retrain_env/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# OS files
+.DS_Store
+
+# Large model cache
+*.joblib

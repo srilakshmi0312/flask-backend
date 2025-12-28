@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crop Yield Prediction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #ffffff;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 30px;
+            background: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        .header h1 {
+            font-size: 26px;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            background: #1e293b;
+            color: #ffffff;
+        }
+
+        select option {
+            background: #1e293b;
+            color: #ffffff;
+        }
+
+        input::placeholder {
+            color: #9ca3af;
+        }
+
+        .btn {
+            margin-top: 30px;
+            padding: 14px;
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(34,197,94,0.4);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        🌾
+        <h1>Crop Yield Prediction</h1>
+    </div>
+
+    <div class="container">
+        <form action="/predict" method="post">
+
+            <label>Crop Name</label>
+            <select name="crop" required>
+                {% for c in crops %}
+                <option value="{{ c }}">{{ c }}</option>
+                {% endfor %}
+            </select>
+
+            <label>State Name</label>
+            <select name="state" required>
+                {% for s in states %}
+                <option value="{{ s }}">{{ s }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Season</label>
+            <select name="season" required>
+                {% for se in seasons %}
+                <option value="{{ se }}">{{ se }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Crop Year (Optional)</label>
+            <input type="number" name="year" placeholder="e.g. 2024">
+
+            <label>Annual Rainfall (Optional)</label>
+            <input type="number" step="any" name="rainfall" placeholder="mm">
+
+            <label>Fertilizer Use (Optional)</label>
+            <input type="number" step="any" name="fertilizer" placeholder="kg/hectare">
+
+            <label>Pesticide Use (Optional)</label>
+            <input type="number" step="any" name="pesticide" placeholder="kg/hectare">
+
+            <button class="btn" type="submit">🔍 Predict Yield</button>
+
+        </form>
+    </div>
+
+</body>
+</html>
